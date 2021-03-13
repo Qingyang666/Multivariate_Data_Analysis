@@ -123,6 +123,8 @@ ggplot(data = data.frame(pc.score2),
        aes(x = Comp.1, y = Comp.2, label = dat$ID))+
   geom_point()+ 
   geom_text(size=3,hjust = 0, nudge_x = 0.05)+
+  geom_hline(yintercept=0,color="red", linetype="dashed")+
+  geom_vline(xintercept=0,color="red", linetype="dashed")+
   labs(title="PC Scores",
        x="PC1", y = "PC2")+
   theme(plot.title = element_text(hjust = 0.5))
