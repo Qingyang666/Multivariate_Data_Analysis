@@ -103,12 +103,36 @@ fa.est.rt.b <- factanal(x = dat[,-1],
                         factors = 2,
                         rotation = "varimax",
                         scores = "Bartlett")
-head(fa.est.rt.b$scores)
-
+b.score <- fa.est.rt.b$scores
+head(b.score)
 # predict factor scores using regression method
 fa.est.rt.r <- factanal(x = dat[,-1],
                         factors = 2,
                         rotation = "varimax",
                         scores = "regression")
-head(fa.est.rt.r$scores)
+r.score <- fa.est.rt.r$scores
+head(r.score)
+
+# plot factor scores
+ggplot(data = data.frame(b.score),
+       aes(x = Factor1, y = Factor2, label = dat$ID))+
+  geom_point()+ 
+  geom_text(size=3,hjust = 0, nudge_x = 0.05)+
+  geom_hline(yintercept=0,color="red", linetype="dashed")+
+  geom_vline(xintercept=0,color="red", linetype="dashed")+
+  labs(title="Factor Scores Using Bartlett's Method",
+       x="Factor1", y = "Factor2")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(data = data.frame(r.score),
+       aes(x = Factor1, y = Factor2, label = dat$ID))+
+  geom_point()+ 
+  geom_text(size=3,hjust = 0, nudge_x = 0.05)+
+  geom_hline(yintercept=0,color="red", linetype="dashed")+
+  geom_vline(xintercept=0,color="red", linetype="dashed")+
+  labs(title="Factor Scores Using Regression Method",
+       x="Factor1", y = "Factor2")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
 
